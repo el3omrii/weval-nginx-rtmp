@@ -4,6 +4,8 @@ FROM ubuntu:18.04
 ENV NGINX_VERSION="nginx-1.18.0"
 ENV NGINX_RTMP_MODULE_VERSION="1.2.1"
 ENV NGINX_CONF_PATH="/etc/nginx/nginx.conf"
+ENV OVERLAY="overlay-720p.png"
+ENV OVERLAY_PATH="/var/www/overlay-720p.png"
 
 # Install dependencies
 RUN set -ex; \
@@ -53,6 +55,7 @@ RUN ln -sf /dev/stdout /var/log/nginx/access.log && \
 
 # Set up config file
 COPY nginx.conf ${NGINX_CONF_PATH}
+COPY ${OVERLAY} ${OVERLAY_PATH}
 
 EXPOSE 1935 8080
 CMD ["nginx", "-g", "daemon off;"]
